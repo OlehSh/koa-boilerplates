@@ -28,8 +28,18 @@ IMPORTANT: without --database migrations log will be saved to default db
 
 ### Env file variables
 
-| Variable                | Default value | Comment                    |
-|-------------------------|:-------------:|----------------------------|
-| PORT                    |     3000      |                            |
-| HOST                    |   localhost   |                            |
-| TOKEN_EXPIRE_TIME       |      1d       | JWT token expiration time  |
+| Variable          | Default value | Comment                   |
+|-------------------|:-------------:|---------------------------|
+| NODE_ENV          |               |                           |
+| APP_PORT          |     3000      |                           |
+| APP_HOST          |   localhost   |                           |
+| TOKEN_EXPIRE_TIME |      1d       | JWT token expiration time |
+| SALT_ROUNDS       |       8       |                           |
+| TOKEN_SECRET      |    secret     |                           |
+| DB_PASSWORD       |               | database password         |
+| DB_USERNAME       |               | database username         |
+| DB_NAME           |               | database name             |
+| DB_HOST           |               | database host             |
+| DB_PORT           |               | database port             |
+| DB_LOGGING        |     false     | database logger status    |
+| DB_CONNECTION     |   postgres    | database connection type  |
