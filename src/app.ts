@@ -4,6 +4,7 @@ import koaBody from "koa-body";
 import logger from "koa-logger"
 import koaPassport from "koa-passport";
 import env from "./config/env";
+import route from './router';
 
 const app = new Koa<Koa.DefaultState>();
 
@@ -13,6 +14,7 @@ app.use(session({}, app));
 app.use(logger())
 app.use(koaPassport.initialize())
 app.use(koaPassport.session())
+app.use(route.middleware());
 app.use(async (ctx, next) => {
   try {
     await next();

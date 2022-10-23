@@ -8,7 +8,7 @@
     "start": "node ./dist/index.js",
     "build": "tsc",
     "dev": "cross-env LOGLEVEL=debug tsnd --inspect --rs -- ./src/index.ts",
-    "test": "npm run test:migrate; mocha --timeout 10000 --exit -r ts-node/register 'src/tests/**/**.test.ts'; npm run test:migrate:rollback",
+    "test": "jest",
     "test:coverage": "nyc npm run test",
     "docker:up": "docker-compose -f ./docker-compose.yaml up --build"
   },
