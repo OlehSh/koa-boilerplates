@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "tsc",
-    "dev": "cross-env LOGLEVEL=debug tsnd --inspect --rs -- ./src/index.ts",
+    "start:dev": "cross-env LOGLEVEL=debug tsnd --inspect --rs -- ./src/index.ts",
     "test": "jest",
     "test:coverage": "nyc npm run test",
     "docker:up": "docker-compose -f ./docker-compose.yaml up --build"
