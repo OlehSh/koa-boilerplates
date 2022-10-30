@@ -13,13 +13,14 @@
     "docker:up": "docker-compose -f ./docker-compose.yaml up --build",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:create": "npm run typeorm migration:create",
-    "migration:run": "npm run typeorm migration:run -- -d ./src/providers/database/pg/cliDataSource.ts",
-    "migration:revert": "npm run typeorm -- -d ./src/providers/database/pg/cliDataSource.ts"
+    "migration:run": "npm run typeorm migration:run -- -d src/providers/database/pg/dataSourceCli.ts",
+    "migration:revert": "npm run typeorm -- -d src/providers/database/pg/dataSourceCli.ts"
   },
   "author": "Oleg Shubin",
   "license": "ISC",
   "dependencies": {
     "@koa/router": "^12.0.0",
+    "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@types/bcrypt": "^5.0.0",
     "@types/chai": "^4.2.22",
     "@types/chai-as-promised": "^7.1.5",
     "@types/eslint": "^8.4.6",

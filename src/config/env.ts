@@ -30,9 +30,9 @@ export default {
       process.env.DB_LOGGING.toLowerCase() === 'true',
     entities: process.env.DB_ENTITIES
       ? [process.env.DB_ENTITIES]
-      : ['dist/**/*.entity.js'],
+      : [`${__dirname}/../modules/api/**/*.entity.{js,ts}`],
     migrations: process.env.DB_MIGRATIONS
-      ? [process.env.DB_MIGRATIONS]
-      : ['dist/providers/database/migrations/*.js'],
+      ? [__dirname + process.env.DB_MIGRATIONS]
+      : [`${__dirname}/../providers/database/pg/migrations/*.{js,ts}`],
   }
 }

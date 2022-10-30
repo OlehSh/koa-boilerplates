@@ -1,7 +1,7 @@
 import { Pg } from './index';
 
-function cliDataSource() {
+function dataSourceCli() {
   return new Pg().dataSource;
 }
 
-export default cliDataSource();
+export default dataSourceCli();

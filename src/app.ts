@@ -36,6 +36,7 @@ app.use(koaBody({
 }));
 
 app.on('error', (err, ctx) => {
+  console.error('server error', err);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   ctx.assert(err, err.status, err.message)
 });

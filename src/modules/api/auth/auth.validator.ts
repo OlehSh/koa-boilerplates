@@ -4,8 +4,8 @@ const Joi = router.Joi;
 const signUpBodyValidator = {
   email: Joi.string().email().required(),
   password: Joi.string().required(),
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
+  firstname: Joi.string().required(),
+  lastname: Joi.string().required(),
   repeatPassword: Joi.string().required().equal(Joi.ref('password'))
 }
 
