@@ -10,7 +10,11 @@
     "start:dev": "cross-env LOGLEVEL=debug tsnd --inspect --rs -- ./src/index.ts",
     "test": "jest",
     "test:coverage": "nyc npm run test",
-    "docker:up": "docker-compose -f ./docker-compose.yaml up --build"
+    "docker:up": "docker-compose -f ./docker-compose.yaml up --build",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:create": "npm run typeorm migration:create",
+    "migration:run": "npm run typeorm migration:run -- -d ./src/providers/database/pg/cliDataSource.ts",
+    "migration:revert": "npm run typeorm -- -d ./src/providers/database/pg/cliDataSource.ts"
   },
   "author": "Oleg Shubin",
   "license": "ISC",

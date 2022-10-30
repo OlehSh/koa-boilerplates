@@ -4,8 +4,8 @@ import env from '../../../config/env';
 
 @singleton()
 export class Pg {
-  instance: DataSource;
+  dataSource: DataSource;
   constructor() {
-    this.instance = new DataSource(env.db as DataSourceOptions);
+    this.dataSource = new DataSource(env.db as DataSourceOptions);
   }
 }

@@ -19,6 +19,7 @@ services:
     volumes:
       - pgdata:/koa_bp/postgres/data
   app:
+    container_name: node_app
     build:
       context: .
     volumes:
