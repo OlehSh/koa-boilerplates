@@ -6,6 +6,8 @@ import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
 import { Context } from 'koa';
 import { validateHash } from '../../../common/helpers/bcrypt.helper';
+import { FindOptionsSelect } from 'typeorm';
+import { User } from '../user/user.entity';
 
 const authService = container.resolve(AuthService);
 const userService = container.resolve(UserService);
@@ -38,7 +40,7 @@ route.post('/sign-in', {
   }
 }, async (ctx: Context) => {
   const { email, password } = ctx.request.body;
-  const user = await userService.find({ email }, ['id', 'email', 'password', 'firstname', 'lastname']);
+  const user = await userService.find({ email }, ['id', 'email', 'password', 'firstname', 'lastname'] as FindOptionsSelect<User>);
   ctx.assert(user, 404, 'User not found');
   ctx.assert(validateHash(password, user.password), 401, 'Unauthorized');
   const { id, firstname, lastname } = user;

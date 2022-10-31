@@ -1,11 +1,11 @@
 import { injectable } from 'tsyringe';
 import { User } from './user.entity';
-import { InsertResult, Repository } from 'typeorm';
+import { FindOptionsSelect, InsertResult, Repository } from 'typeorm';
 import { Pg } from '../../../providers/database/pg';
 
 @injectable()
 export class UserService {
-  userRepository: Repository<User>
+  userRepository: Repository<User>;
   constructor(pg: Pg) {
     this.userRepository = pg.dataSource.getRepository(User);
   }
@@ -29,9 +29,19 @@ export class UserService {
     }
   }
 
-  async find(user: Partial<User>, fields): Promise<User> {
+  async find(user: Partial<User>, fields?: FindOptionsSelect<User>): Promise<User> {
     try {
       return this.userRepository.findOne({
+        where: user,
+        select: fields,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+  async findAll(user?: Partial<User>, fields?: FindOptionsSelect<User>): Promise<User[]> {
+    try {
+      return this.userRepository.find({
         where: user,
         select: fields,
       });
