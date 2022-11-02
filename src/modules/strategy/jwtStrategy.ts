@@ -13,18 +13,16 @@ const opts = {
 }
 
 export default function initStrategy(): void {
-  koaPassport.use('jwt', new JwtStrategy(opts, (payload: Partial<User>, done) => {
-    userService.find({ id: payload.id })
-      .then(user => {
-        if (user) {
-          return done(null, user)
-        } else {
-          return done(null, false)
-        }
-      })
-      .catch(e => {
-        return done(e)
-      })
-    // done(null, payload)
+  koaPassport.use('jwt', new JwtStrategy(opts, async (payload: Partial<User>, done) => {
+    try {
+      const user = await userService.find({ id: payload.id });
+      if (user) {
+        return done(null, user)
+      } else {
+        return done(null, false)
+      }
+    } catch (e) {
+      return done(e)
+    }
   }));
 }
