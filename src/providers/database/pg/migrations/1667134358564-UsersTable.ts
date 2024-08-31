@@ -36,12 +36,12 @@ export class UsersTable1667134358564 implements MigrationInterface {
           {
             name: 'password',
             type: 'varchar',
-            length: '255',
+            length: '500',
             isNullable: false,
           }
         ]
       }
-    ), true,)
+    ))
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

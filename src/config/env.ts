@@ -9,7 +9,7 @@ export default {
   port: process.env.APP_PORT ? Number(process.env.APP_PORT) : 3000,
   host: process.env.APP_HOST || 'localhost',
   auth: {
-    saltRounds: process.env.SALT_ROUNDS ? Number(process.env.SALT_ROUNDS) : 8,
+    saltRounds: process.env.SALT_ROUNDS ? Number(process.env.SALT_ROUNDS) : 16,
   },
   token: {
     secret: process.env.TOKEN_SECRET || 'secret',

@@ -1,20 +1,19 @@
-import router from "koa-joi-router";
-const Joi = router.Joi;
+import Joi, { Schema } from 'joi';
 
-const signUpBodyValidator = {
+const signUpBodySchema: Schema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
   firstname: Joi.string().required(),
   lastname: Joi.string().required(),
   repeatPassword: Joi.string().required().equal(Joi.ref('password'))
-}
+});
 
-const signInBodyValidator = {
+const signInBodySchema: Schema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
-}
+});
 
 export {
-  signUpBodyValidator,
-  signInBodyValidator,
+  signUpBodySchema,
+  signInBodySchema,
 }
