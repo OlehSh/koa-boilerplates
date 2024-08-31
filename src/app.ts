@@ -2,10 +2,8 @@ import Koa from 'koa';
 import session from 'koa-session';
 import koaBody from 'koa-body';
 import logger from 'koa-logger';
-import koaPassport from 'koa-passport';
 import env from './config/env';
 import route from './router';
-import initStrategy from './modules/strategy/jwtStrategy';
 import { HttpMethodEnum } from 'koa-body/lib/types';
 import bodyParser from 'koa-bodyparser';
 
@@ -16,10 +14,7 @@ app.keys = [env.token.secret];
 app.use(bodyParser());
 app.use(session({}, app));
 app.use(logger())
-app.use(koaPassport.initialize())
-app.use(koaPassport.session())
 app.use(route.middleware());
-initStrategy();
 app.use(async (ctx, next) => {
   try {
     await next();

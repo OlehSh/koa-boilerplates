@@ -7,8 +7,8 @@ const route = new Router();
 
 route.prefix('/auth');
 
-route.post('/sign-up', validate(signUpBodySchema), signUp);
+route.post('/sign-up', validate(signUpBodySchema, 'body'), signUp);
 
-route.post('/sign-in', validate(signInBodySchema), signIn);
+route.post('/sign-in', validate(signInBodySchema, 'body'), signIn);
 
 export default route.middleware();

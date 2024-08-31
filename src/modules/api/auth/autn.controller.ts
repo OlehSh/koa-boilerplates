@@ -8,13 +8,17 @@ import { validateHash } from '../../../common/helpers/crypto.helper';
 const authService = container.resolve(AuthService);
 const userService = container.resolve(UserService);
 
-export const signUp =  async (ctx: Context) => {
-  const userDat =<Partial<User>>ctx.request.body;
-  const hash = authService.getPasswordHash(userDat.password);
-  ctx.body = await userService.create({ ...userDat, password: hash });
+export const signUp = async (ctx: Context) => {
+  try {
+    const userDat =<Partial<User>>ctx.request.body;
+    const hash = authService.getPasswordHash(userDat.password);
+    ctx.body = await userService.create({ ...userDat, password: hash });
+  } catch (error) {
+    ctx.message = 'Signup failed';
+  }
 }
 
-export const signIn =async (ctx: Context) => {
+export const signIn = async (ctx: Context) => {
   ctx.body = 'ok signIn';
   const { email, password } = <{ email: string, password: string}>ctx.request.body;
   const user = await userService.find({ email }, {
