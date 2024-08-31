@@ -1,7 +1,7 @@
-import router from 'koa-joi-router';
+import Router from '@koa/router';
 import { getAppStatus } from './health.controller';
 
-const route = router();
+const route = new Router();
 
 route.prefix('/health');
 
