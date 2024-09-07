@@ -1,19 +1,19 @@
 import Koa from 'koa';
-import session from "koa-session";
-import koaBody from "koa-body";
-import logger from "koa-logger"
-import koaPassport from "koa-passport";
-import env from "./config/env";
+import session from 'koa-session';
+import koaBody from 'koa-body';
+import logger from 'koa-logger';
+import env from './config/env';
 import route from './router';
+import { HttpMethodEnum } from 'koa-body/lib/types';
+import bodyParser from 'koa-bodyparser';
 
 const app = new Koa<Koa.DefaultState>();
 
 app.keys = [env.token.secret];
 
+app.use(bodyParser());
 app.use(session({}, app));
 app.use(logger())
-app.use(koaPassport.initialize())
-app.use(koaPassport.session())
 app.use(route.middleware());
 app.use(async (ctx, next) => {
   try {
@@ -29,13 +29,20 @@ app.use(async (ctx, next) => {
 });
 app.use(koaBody({
   multipart: true,
-  parsedMethods: [ 'POST', 'PUT', 'DELETE', 'PATCH' ],
+  parsedMethods:[
+    HttpMethodEnum.PUT,
+    HttpMethodEnum.POST,
+    HttpMethodEnum.PATCH,
+    HttpMethodEnum.GET,
+    HttpMethodEnum.DELETE
+  ],
   formidable: {
     maxFileSize: 100 * 1024 * 1024 // 100 Mb
   }
 }));
 
 app.on('error', (err, ctx) => {
+  console.error('server error', err);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   ctx.assert(err, err.status, err.message)
 });

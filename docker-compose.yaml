@@ -1,0 +1,38 @@
+version: "3.9"
+networks:
+  internal:
+volumes:
+    pgdata:
+services:
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    expose:
+      - ${DB_PORT}
+    container_name: pg_bp
+    environment:
+      POSTGRES_USER: "${DB_USERNAME}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    networks:
+        - internal
+    volumes:
+      - pgdata:/koa_bp/postgres/data
+  app:
+    container_name: node_app
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - /node_modules
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    environment:
+      DB_HOST: postgres
+    command: npm run start:dev
+    env_file:
+      - .env
+    networks:
+      - internal
+    depends_on:
+      - postgres
